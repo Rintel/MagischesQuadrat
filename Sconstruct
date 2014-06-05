@@ -1,0 +1,36 @@
+# Teil 1: Optionen
+include_dateien		=  [		# wo wird nach .h Dateien gesucht?
+'.'					# im lokalen Verzeichnis
+]
+shared_libraries = [
+		'm'
+]
+cpp_standard		=  [		# Angaben zum Standard
+'-std=c++98',				# ISO
+'-pedantic'				# keine Erweiterung zulaessig
+]
+warnungen		=  [		# Einstellungen zu Syntaxfehlern
+'-Wall',				# viel meckern
+'-Wextra',				# extra viel meckern
+'-Werror'				# Warnungen sind Fehler
+]
+
+# Teil 2: Definition des Enviroments
+std = Environment(
+CXXFLAGS = cpp_standard + warnungen,
+CPPPATH = include_dateien,
+LIBS = shared_libraries
+
+)
+
+# Teil 3: Programm bauen
+cpp_dateien = [					# hier C++-Dateien einfuegen
+'meine_eingabe.cpp',
+'Magische_Quadrate.cpp',			# Kommentar moeglich
+'Magisches_Quadrat.cpp',
+'magisches_q_main.cpp'
+						# Kommentar moeglich
+]
+programm_name = 'magic'		# Programnamen festlegen
+std.Program(programm_name, cpp_dateien)		# Programm bauen
+
